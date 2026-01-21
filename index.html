@@ -18,12 +18,11 @@ button:hover{background:#333}
 
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:25px}
 
-/* PRODUCT CARD */
 .card{
 background:#fff;
 padding:15px;
 border-radius:15px;
-border:2px solid red;   /* 🔴 RED BORDER */
+border:2px solid red;
 box-shadow:0 6px 18px rgba(0,0,0,0.1)
 }
 .card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
@@ -46,9 +45,7 @@ font-size:13px
 .share a.fb{background:#1877f2}
 
 footer{background:#111;color:#ccc;text-align:center;padding:20px}
-.hidden{display:none}
 
-/* ORDER POPUP */
 #orderBox{
 position:fixed;
 top:0;left:0;
@@ -78,16 +75,8 @@ width:90%
 
 <div class="container">
 
-<!-- LOGIN -->
-<div class="form-box" id="loginBox">
-<h2>Admin Login</h2>
-<input id="username" placeholder="Username">
-<input type="password" id="password" placeholder="Password">
-<button onclick="login()">Login</button>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="form-box hidden" id="adminPanel">
+<!-- ADMIN PANEL (DIRECT OPEN) -->
+<div class="form-box">
 <h2>Add New Product</h2>
 <input id="pname" placeholder="Product Name">
 <input id="pprice" type="number" placeholder="Price PKR">
@@ -118,15 +107,9 @@ width:90%
 <script>
 let currentProduct="";
 
-function login(){
-if(username.value==="admin" && password.value==="12345"){
-adminPanel.classList.remove("hidden");
-loginBox.style.display="none";
-}else alert("Wrong Login");
-}
-
 function addProduct(){
-if(!pname.value||!pprice.value||!pimage.files[0])return alert("Fill all");
+if(!pname.value||!pprice.value||!pimage.files[0]) return alert("Fill all fields");
+
 const r=new FileReader();
 r.onload=e=>{
 const card=document.createElement("div");
@@ -143,6 +126,7 @@ card.innerHTML=`
 productList.appendChild(card);
 };
 r.readAsDataURL(pimage.files[0]);
+
 pname.value="";pprice.value="";pimage.value="";
 }
 
@@ -160,4 +144,4 @@ closeOrder();
 </script>
 
 </body>
-</html>
+  </html>
