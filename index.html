@@ -14,7 +14,7 @@ nav a:hover{color:red}
 .container{max-width:1100px;margin:auto;padding:20px}
 
 /* LOGIN */
-#loginBox{background:#fff;padding:15px;border-radius:10px;max-width:350px;margin:auto;margin-bottom:20px;display:none}
+#loginBox{background:#fff;padding:15px;border-radius:10px;max-width:350px;margin:auto;display:none}
 
 /* ADMIN PANEL */
 .admin{background:#fff;padding:15px;border-radius:10px;margin-bottom:20px;display:none}
@@ -27,10 +27,9 @@ nav a:hover{color:red}
 .btn{padding:10px;border:none;border-radius:6px;cursor:pointer;width:100%}
 .buy{background:red;color:#fff}
 .buy:hover{background:#c40000}
-.cartBtn{background:#000;color:#fff;margin-top:5px}
 
 /* CART */
-#cartBox{background:#fff;padding:15px;border-radius:10px;margin-top:20px}
+#cartBox{background:#fff;padding:15px;border-radius:10px;display:none}
 .cartItem{display:flex;justify-content:space-between;margin:5px 0}
 
 /* POPUP */
@@ -38,9 +37,10 @@ nav a:hover{color:red}
 .popupBox{background:#fff;padding:15px;border-radius:10px;width:90%;max-width:400px}
 
 /* FOOTER */
-footer{background:#111;color:#ccc;text-align:center;padding:15px;margin-top:20px}
+footer{background:#111;color:#ccc;text-align:center;padding:15px;margin-top:20px;display:none}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -48,10 +48,10 @@ footer{background:#111;color:#ccc;text-align:center;padding:15px;margin-top:20px
 </header>
 
 <nav>
-<a href="#products">Products</a>
-<a href="#cart">Cart</a>
-<a href="#contact">Contact</a>
-<a href="#" onclick="showLogin()">Admin</a>
+<a href="#" onclick="showProducts()">Products</a>
+<a href="#" onclick="showCart()">Cart</a>
+<a href="#" onclick="showContact()">Contact</a>
+<a href="#" onclick="showAdmin()">Admin</a>
 </nav>
 
 <div class="container">
@@ -73,18 +73,26 @@ footer{background:#111;color:#ccc;text-align:center;padding:15px;margin-top:20px
 </div>
 
 <!-- PRODUCTS -->
-<h2 id="products">Products</h2>
+<div id="productSection">
+<h2>Products</h2>
 <div class="products" id="productList"></div>
+</div>
 
 <!-- CART -->
 <div id="cartBox">
-<h3 id="cart">Cart</h3>
+<h3>Cart</h3>
 <div id="cartItems"></div>
 <h4>Total: PKR <span id="totalPrice">0</span></h4>
 <button class="btn buy" onclick="checkout()">Checkout</button>
 </div>
 
 </div>
+
+<!-- CONTACT -->
+<footer id="contact">
+<p>Contact: 0327-6965196</p>
+<p>© 2026 F Crown</p>
+</footer>
 
 <!-- ORDER POPUP -->
 <div class="popup" id="orderPopup">
@@ -98,18 +106,13 @@ footer{background:#111;color:#ccc;text-align:center;padding:15px;margin-top:20px
 </div>
 </div>
 
-<footer id="contact">
-<p>Contact: 0327-6965196</p>
-<p>© 2026 F Crown</p>
-</footer>
-
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 
 <script>
-/* 🔥 APNA FIREBASE CONFIG YAHAN DALO */
+/* 🔥 FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "PASTE_HERE",
   authDomain: "PASTE_HERE",
@@ -123,131 +126,94 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
 
-/* ================= ADMIN LOGIN ================= */
-const ADMIN_PASSWORD = "12345"; // yahan apna password rakho
+/* ADMIN PASSWORD */
+const ADMIN_PASSWORD = "12345";
 
-function showLogin(){
-  document.getElementById("loginBox").style.display="block";
+/* SECTION CONTROL */
+function hideAll(){
+  productSection.style.display="none";
+  cartBox.style.display="none";
+  contact.style.display="none";
+  adminPanel.style.display="none";
+  loginBox.style.display="none";
 }
 
+/* NAV FUNCTIONS */
+function showProducts(){ hideAll(); productSection.style.display="block"; }
+function showCart(){ hideAll(); cartBox.style.display="block"; }
+function showContact(){ hideAll(); contact.style.display="block"; }
+function showAdmin(){ hideAll(); loginBox.style.display="block"; }
+
+/* LOGIN */
 function login(){
-  if(adminPass.value === ADMIN_PASSWORD){
+  if(adminPass.value===ADMIN_PASSWORD){
     alert("Login Success");
-    document.getElementById("adminPanel").style.display="block";
-    document.getElementById("loginBox").style.display="none";
-  }else{
-    alert("Wrong Password");
-  }
+    hideAll();
+    adminPanel.style.display="block";
+    productSection.style.display="block";
+  }else alert("Wrong Password");
 }
 
-/* ================= ADD PRODUCT ================= */
+/* ADD PRODUCT */
 function addProduct(){
-  if(!pname.value || !pprice.value || !pimage.files[0]){
-    alert("Fill all fields");
-    return;
-  }
-
-  const file = pimage.files[0];
-  const ref = storage.ref("products/" + Date.now() + "_" + file.name);
-
-  ref.put(file).then(snap=>{
-    snap.ref.getDownloadURL().then(url=>{
-      db.collection("products").add({
-        name:pname.value,
-        price:pprice.value,
-        image:url,
-        time: firebase.firestore.FieldValue.serverTimestamp()
-      });
+  if(!pname.value||!pprice.value||!pimage.files[0]) return alert("Fill all fields");
+  let file=pimage.files[0];
+  let ref=storage.ref("products/"+Date.now()+file.name);
+  ref.put(file).then(s=>s.ref.getDownloadURL().then(url=>{
+    db.collection("products").add({
+      name:pname.value,
+      price:Number(pprice.value),
+      image:url,
+      time:firebase.firestore.FieldValue.serverTimestamp()
     });
-  });
-
-  pname.value="";
-  pprice.value="";
-  pimage.value="";
+  }));
+  pname.value=pprice.value=pimage.value="";
 }
 
-/* ================= LOAD PRODUCTS ================= */
-let cart = [];
-
-db.collection("products").orderBy("time","desc").onSnapshot(snapshot=>{
+/* LOAD PRODUCTS */
+let cart=[];
+db.collection("products").orderBy("time","desc").onSnapshot(snap=>{
   productList.innerHTML="";
-  snapshot.forEach(doc=>{
-    const d = doc.data();
-    productList.innerHTML += `
-      <div class="card">
-        <img src="${d.image}">
-        <h3>${d.name}</h3>
-        <p class="price">PKR ${d.price}</p>
-        <button class="btn buy" onclick="addToCart('${d.name}',${d.price})">Add to Cart</button>
-      </div>
-    `;
+  snap.forEach(doc=>{
+    let d=doc.data();
+    productList.innerHTML+=`
+    <div class="card">
+      <img src="${d.image}">
+      <h3>${d.name}</h3>
+      <p class="price">PKR ${d.price}</p>
+      <button class="btn buy" onclick="addToCart('${d.name}',${d.price})">Add to Cart</button>
+    </div>`;
   });
 });
 
-/* ================= CART SYSTEM ================= */
-function addToCart(name,price){
-  cart.push({name,price});
-  renderCart();
-}
-
+/* CART */
+function addToCart(name,price){ cart.push({name,price}); renderCart(); }
 function renderCart(){
-  cartItems.innerHTML="";
-  let total=0;
-  cart.forEach((item,i)=>{
-    total+=item.price;
-    cartItems.innerHTML += `
-      <div class="cartItem">
-        <span>${item.name}</span>
-        <span>PKR ${item.price}</span>
-      </div>
-    `;
-  });
+  cartItems.innerHTML=""; let total=0;
+  cart.forEach(i=>{ total+=i.price; cartItems.innerHTML+=`<div class="cartItem"><span>${i.name}</span><span>PKR ${i.price}</span></div>`; });
   totalPrice.innerText=total;
 }
 
-function checkout(){
-  if(cart.length==0){
-    alert("Cart empty");
-    return;
-  }
-  orderPopup.style.display="flex";
-}
+/* ORDER */
+function checkout(){ if(cart.length==0) alert("Cart empty"); else orderPopup.style.display="flex"; }
+function closePopup(){ orderPopup.style.display="none"; }
 
-function closePopup(){
-  orderPopup.style.display="none";
-}
-
-/* ================= SAVE ORDER ================= */
 function submitOrder(){
-  if(!cname.value || !cmobile.value || !caddress.value){
-    alert("Fill all fields");
-    return;
-  }
-
-  let orderData = {
-    customerName: cname.value,
-    mobile: cmobile.value,
-    address: caddress.value,
-    items: cart,
-    total: cart.reduce((s,i)=>s+i.price,0),
-    time: firebase.firestore.FieldValue.serverTimestamp()
-  };
-
-  db.collection("orders").add(orderData);
-
-  let msg = "New Order:%0A";
-  cart.forEach(i=> msg += i.name + " - PKR " + i.price + "%0A");
-  msg += "Total: PKR " + orderData.total + "%0A";
-  msg += "Name: " + cname.value + "%0AMobile: " + cmobile.value + "%0AAddress: " + caddress.value;
-
-  window.open("https://wa.me/923276965196?text="+msg,"_blank");
-
-  cart=[];
-  renderCart();
-  closePopup();
-  alert("Order Submitted!");
+  if(!cname.value||!cmobile.value||!caddress.value) return alert("Fill all fields");
+  db.collection("orders").add({
+    name:cname.value,mobile:cmobile.value,address:caddress.value,
+    items:cart,total:cart.reduce((s,i)=>s+i.price,0),
+    time:firebase.firestore.FieldValue.serverTimestamp()
+  });
+  let msg="New Order:%0A";
+  cart.forEach(i=>msg+=`${i.name} - PKR ${i.price}%0A`);
+  window.open("https://wa.me/923276965196?text="+msg);
+  cart=[]; renderCart(); closePopup(); alert("Order Sent");
 }
+
+/* DEFAULT */
+window.onload=()=>showProducts();
 </script>
 
 </body>
-  </html>
+                                                       </html>
