@@ -329,7 +329,80 @@ function submitOrder(){
 
 window.onload=showProducts;
 </script>
-<!-- Product Announcement Bar Start -->
+<style>
+  /* Announcement Bar Styling for Product Section */
+  #announcement-bar {
+    width: 100%;
+    background: #ff6f61; /* Bright color to attract attention */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 15px; /* space below bar */
+    border-radius: 5px;
+    gap: 15px; /* space between image and text */
+  }
+
+  #announcement-img {
+    height: 60px; /* Adjust according to your site layout */
+    width: auto;
+    border-left: 5px solid red; /* Left red line */
+    padding-left: 10px; /* space between line and image */
+    border-radius: 3px;
+  }
+
+  #announcement-text {
+    flex: 1;
+  }
+
+  #close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    #announcement-bar {
+      flex-direction: column;
+      text-align: center;
+    }
+    #announcement-img {
+      margin-bottom: 10px;
+      border-left: none; /* optional for mobile */
+      padding-left: 0;
+    }
+  }
+</style>
+
+<!-- Announcement Bar -->
+<div id="announcement-bar">
+  <img id="announcement-img" src="your-product-image.jpg" alt="Product">
+  <div id="announcement-text">🔥 Special Offer! Only 950 — Limited Time!</div>
+  <button id="close-btn">&times;</button>
+</div>
+
+<script>
+  // Close Button Functionality
+  document.getElementById('close-btn').onclick = function() {
+    document.getElementById('announcement-bar').style.display = 'none';
+  };
+
+  // Automatically move the announcement bar to the top of the product section
+  window.addEventListener('DOMContentLoaded', function() {
+    const announcementBar = document.getElementById('announcement-bar');
+    const productSection = document.getElementById('product-section'); // replace with your actual product container ID
+
+    if (productSection && announcementBar) {
+      productSection.prepend(announcementBar); // moves bar to the top of products
+    }
+  });
+</script>
 
 </body>
   </html>
