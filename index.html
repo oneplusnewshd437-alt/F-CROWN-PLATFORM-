@@ -202,13 +202,9 @@ footer{
   </div>
   <button id="close-btn">&times;</button>
 </div>
-
 <style>
-  /* Announcement Bar Styling */
+  /* Announcement Bar Styling for Product Section */
   #announcement-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     background: #ff6f61; /* Bright color to attract attention */
     color: #fff;
@@ -219,8 +215,9 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 15px; /* space below bar */
+    border-radius: 5px;
   }
 
   #announcement-img {
@@ -243,14 +240,18 @@ footer{
   }
 </style>
 
+<div id="announcement-bar">
+  <img id="announcement-img" src="your-product-image.jpg" alt="Product">
+  <div id="announcement-text">🔥 Special Offer! Only 950 — Limited Time!</div>
+  <button id="close-btn">&times;</button>
+</div>
+
 <script>
   // Close Button Functionality
   document.getElementById('close-btn').onclick = function() {
     document.getElementById('announcement-bar').style.display = 'none';
   };
 </script>
-<!-- Product Announcement Bar End -->
-
 </div>
 
 <!-- CART -->
