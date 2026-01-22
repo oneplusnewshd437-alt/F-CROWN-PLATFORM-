@@ -121,12 +121,10 @@ padding:20px
 
 <body>
 
-<!-- FULL TOP IMAGE -->
 <div class="top-banner">
   <img src="1769020865804.jpg">
 </div>
 
-<!-- MENU -->
 <div class="menu-bar">
   <a href="#products">PRODUCTS</a>
   <a href="#contact">CONTACT</a>
@@ -162,10 +160,9 @@ padding:20px
 
 <footer id="contact">
 <p><strong>Contact:</strong> 0327-6965196</p>
-<p>© 2026 F Crown</p>
+<p>© 2022 F Crown</p>
 </footer>
 
-<!-- 🔥 FIREBASE (PAGE END) -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
@@ -183,11 +180,14 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-/* LOAD PRODUCTS (ALL PUBLIC) */
-db.collection("products").onSnapshot(snapshot=>{
+/* ✅ LOAD PRODUCTS FOR ALL USERS */
+db.collection("products").orderBy("time","desc").onSnapshot(snapshot=>{
   products.innerHTML="";
   snapshot.forEach(doc=>{
     const d = doc.data();
+    const pageLink = location.href;
+    const shareText = encodeURIComponent(`Product: ${d.name}\nPrice: PKR ${d.price}\nLink: ${pageLink}`);
+    
     products.innerHTML += `
     <div class="card">
       <img src="${d.image}">
@@ -195,8 +195,8 @@ db.collection("products").onSnapshot(snapshot=>{
       <p class="price">PKR ${d.price}</p>
       <button class="order-btn" onclick="openOrder('${d.name}','${d.price}')">Order Now</button>
       <div class="share">
-        <a href="https://wa.me/?text=${d.name} PKR ${d.price}" target="_blank">WhatsApp</a>
-        <a class="fb" href="https://facebook.com/sharer/sharer.php?u=${location.href}" target="_blank">Facebook</a>
+        <a href="https://wa.me/?text=${shareText}" target="_blank">WhatsApp</a>
+        <a class="fb" href="https://facebook.com/sharer/sharer.php?u=${pageLink}" target="_blank">Facebook</a>
       </div>
     </div>`;
   });
@@ -212,7 +212,8 @@ function addProduct(){
     db.collection("products").add({
       name:pname.value,
       price:pprice.value,
-      image:e.target.result
+      image:e.target.result,
+      time: firebase.firestore.FieldValue.serverTimestamp()
     });
   };
   r.readAsDataURL(pimage.files[0]);
