@@ -7,109 +7,204 @@
 
 <style>
 body{margin:0;font-family:Arial;background:#f4f4f4}
-header img{width:100%;max-height:350px;object-fit:cover}
-nav{background:#000;padding:12px;text-align:center}
-nav a{color:#fff;margin:0 15px;text-decoration:none;font-weight:bold}
+
+/* HEADER */
+header img{
+  width:100%;
+  max-height:350px;
+  object-fit:cover;
+}
+
+/* NAV */
+nav{
+  background:#000;
+  padding:12px;
+  text-align:center
+}
+nav a{
+  color:#fff;
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold
+}
 nav a:hover{color:red}
-.container{max-width:1100px;margin:auto;padding:20px}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px
+}
 
 /* LOGIN */
-#loginBox{background:#fff;padding:15px;border-radius:10px;max-width:350px;margin:auto;display:none}
+#loginBox{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  max-width:350px;
+  margin:auto;
+  display:none
+}
 
 /* ADMIN PANEL */
-.admin{background:#fff;padding:15px;border-radius:10px;margin-bottom:20px;display:none}
+.admin{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+  display:none
+}
 
-/* PRODUCTS */
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#fff;border-radius:12px;padding:12px;border:2px solid red;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.card img{width:100%;height:200px;object-fit:cover;border-radius:8px}
-.price{font-weight:bold;margin:6px 0}
-.btn{padding:10px;border:none;border-radius:6px;cursor:pointer;width:100%}
-.buy{background:red;color:#fff}
+/* PRODUCTS GRID */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px
+}
+
+/* PRODUCT CARD */
+.card{
+  background:#fff;
+  border-radius:12px;
+  padding:12px;
+  border:2px solid red;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  overflow:hidden; /* IMPORTANT */
+}
+
+/* IMAGE FIXED SIZE */
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:10px;
+  background:#eee;
+}
+
+/* PRICE */
+.price{
+  font-weight:bold;
+  margin:6px 0
+}
+
+/* BUTTON */
+.btn{
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  width:100%
+}
+.buy{
+  background:red;
+  color:#fff
+}
 .buy:hover{background:#c40000}
 
 /* CART */
-#cartBox{background:#fff;padding:15px;border-radius:10px;display:none}
-.cartItem{display:flex;justify-content:space-between;margin:5px 0}
+#cartBox{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  display:none
+}
+.cartItem{
+  display:flex;
+  justify-content:space-between;
+  margin:5px 0
+}
 
 /* POPUP */
-.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
-.popupBox{background:#fff;padding:15px;border-radius:10px;width:90%;max-width:400px}
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center
+}
+.popupBox{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  width:90%;
+  max-width:400px
+}
 
 /* FOOTER */
-footer{background:#111;color:#ccc;text-align:center;padding:15px;margin-top:20px;display:none}
+footer{
+  background:#111;
+  color:#ccc;
+  text-align:center;
+  padding:15px;
+  margin-top:20px;
+  display:none
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<img src="1769020865804.jpg">
+  <img src="1769020865804.jpg">
 </header>
 
 <nav>
-<a href="#" onclick="showProducts()">Products</a>
-<a href="#" onclick="showCart()">Cart</a>
-<a href="#" onclick="showContact()">Contact</a>
-<a href="#" onclick="showAdmin()">Admin</a>
+  <a href="#" onclick="showProducts()">Products</a>
+  <a href="#" onclick="showCart()">Cart</a>
+  <a href="#" onclick="showContact()">Contact</a>
+  <a href="#" onclick="showAdmin()">Admin</a>
 </nav>
 
 <div class="container">
 
 <!-- LOGIN -->
 <div id="loginBox">
-<h3>Admin Login</h3>
-<input id="adminPass" placeholder="Password">
-<button class="btn buy" onclick="login()">Login</button>
+  <h3>Admin Login</h3>
+  <input id="adminPass" placeholder="Password">
+  <button class="btn buy" onclick="login()">Login</button>
 </div>
 
 <!-- ADMIN PANEL -->
 <div class="admin" id="adminPanel">
-<h3>Add Product</h3>
-<input id="pname" placeholder="Product Name">
-<input id="pprice" type="number" placeholder="Price PKR">
-<input id="pimage" type="file">
-<button class="btn buy" onclick="addProduct()">Upload Product</button>
+  <h3>Add Product</h3>
+  <input id="pname" placeholder="Product Name"><br><br>
+  <input id="pprice" type="number" placeholder="Price PKR"><br><br>
+  <input id="pimage" type="file"><br><br>
+  <button class="btn buy" onclick="addProduct()">Upload Product</button>
 </div>
 
 <!-- PRODUCTS -->
 <div id="productSection">
 <h2>Products</h2>
+
 <div class="products" id="productList"></div>
-  <div class="product-card">
-  <div class="red-line"></div>
 
-  <img src="Screenshot_20260122-152453.jpg" alt="Jewelry Gift Set">
-
+<!-- STATIC PRODUCT -->
+<div class="products">
+<div class="card">
+  <img src="Screenshot_20260122-152453.jpg">
   <h3>Jewelry Gift Set 🔥</h3>
-
-  <p class="price">Price: PKR <b>950</b></p>
-
-  <p class="details">
-    Includes 👀<br>
-    Bangles set<br>
-    Earrings<br>
-    Pendant with chain<br>
-    Bracelet<br>
-    Lip gloss<br>
-    Eye pencil<br>
-    Candies<br>
-    Mini card<br>
-    <span class="offer">(Limited time offer)</span>
+  <p class="price">PKR 950</p>
+  <p>
+    Bangles, Earrings, Pendant, Bracelet,<br>
+    Lip gloss, Eye pencil, Candies, Card<br>
+    <b>Limited Offer</b>
   </p>
+  <button class="btn buy" onclick="addToCart('Jewelry Gift Set',950)">Add to Cart</button>
+</div>
+</div>
 
-  <button class="btn buy" onclick="addToCart('Jewelry Gift Set', 950)">
-    Add to Cart
-  </button>
-  </div>
 </div>
 
 <!-- CART -->
 <div id="cartBox">
-<h3>Cart</h3>
-<div id="cartItems"></div>
-<h4>Total: PKR <span id="totalPrice">0</span></h4>
-<button class="btn buy" onclick="checkout()">Checkout</button>
+  <h3>Cart</h3>
+  <div id="cartItems"></div>
+  <h4>Total: PKR <span id="totalPrice">0</span></h4>
+  <button class="btn buy" onclick="checkout()">Checkout</button>
 </div>
 
 </div>
@@ -120,13 +215,13 @@ footer{background:#111;color:#ccc;text-align:center;padding:15px;margin-top:20px
 <p>© 2026 F Crown</p>
 </footer>
 
-<!-- ORDER POPUP -->
+<!-- POPUP -->
 <div class="popup" id="orderPopup">
 <div class="popupBox">
 <h3>Place Order</h3>
-<input id="cname" placeholder="Your Name">
-<input id="cmobile" placeholder="Mobile Number">
-<textarea id="caddress" placeholder="Address"></textarea>
+<input id="cname" placeholder="Your Name"><br><br>
+<input id="cmobile" placeholder="Mobile Number"><br><br>
+<textarea id="caddress" placeholder="Address"></textarea><br><br>
 <button class="btn buy" onclick="submitOrder()">Submit</button>
 <button class="btn" onclick="closePopup()">Cancel</button>
 </div>
@@ -138,7 +233,6 @@ footer{background:#111;color:#ccc;text-align:center;padding:15px;margin-top:20px
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 
 <script>
-/* 🔥 FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "PASTE_HERE",
   authDomain: "PASTE_HERE",
@@ -149,13 +243,12 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const storage = firebase.storage();
+const db=firebase.firestore();
+const storage=firebase.storage();
 
-/* ADMIN PASSWORD */
-const ADMIN_PASSWORD = "12345";
+const ADMIN_PASSWORD="12345";
+let cart=[];
 
-/* SECTION CONTROL */
 function hideAll(){
   productSection.style.display="none";
   cartBox.style.display="none";
@@ -164,23 +257,19 @@ function hideAll(){
   loginBox.style.display="none";
 }
 
-/* NAV FUNCTIONS */
-function showProducts(){ hideAll(); productSection.style.display="block"; }
-function showCart(){ hideAll(); cartBox.style.display="block"; }
-function showContact(){ hideAll(); contact.style.display="block"; }
-function showAdmin(){ hideAll(); loginBox.style.display="block"; }
+function showProducts(){hideAll();productSection.style.display="block";}
+function showCart(){hideAll();cartBox.style.display="block";}
+function showContact(){hideAll();contact.style.display="block";}
+function showAdmin(){hideAll();loginBox.style.display="block";}
 
-/* LOGIN */
 function login(){
   if(adminPass.value===ADMIN_PASSWORD){
-    alert("Login Success");
     hideAll();
     adminPanel.style.display="block";
     productSection.style.display="block";
   }else alert("Wrong Password");
 }
 
-/* ADD PRODUCT */
 function addProduct(){
   if(!pname.value||!pprice.value||!pimage.files[0]) return alert("Fill all fields");
   let file=pimage.files[0];
@@ -196,8 +285,6 @@ function addProduct(){
   pname.value=pprice.value=pimage.value="";
 }
 
-/* LOAD PRODUCTS */
-let cart=[];
 db.collection("products").orderBy("time","desc").onSnapshot(snap=>{
   productList.innerHTML="";
   snap.forEach(doc=>{
@@ -212,34 +299,30 @@ db.collection("products").orderBy("time","desc").onSnapshot(snap=>{
   });
 });
 
-/* CART */
-function addToCart(name,price){ cart.push({name,price}); renderCart(); }
+function addToCart(n,p){cart.push({n,p});renderCart();}
 function renderCart(){
-  cartItems.innerHTML=""; let total=0;
-  cart.forEach(i=>{ total+=i.price; cartItems.innerHTML+=`<div class="cartItem"><span>${i.name}</span><span>PKR ${i.price}</span></div>`; });
-  totalPrice.innerText=total;
+  cartItems.innerHTML="";
+  let t=0;
+  cart.forEach(i=>{
+    t+=i.p;
+    cartItems.innerHTML+=`<div class="cartItem"><span>${i.n}</span><span>PKR ${i.p}</span></div>`;
+  });
+  totalPrice.innerText=t;
 }
 
-/* ORDER */
-function checkout(){ if(cart.length==0) alert("Cart empty"); else orderPopup.style.display="flex"; }
-function closePopup(){ orderPopup.style.display="none"; }
+function checkout(){
+  if(cart.length==0) alert("Cart empty");
+  else orderPopup.style.display="flex";
+}
+function closePopup(){orderPopup.style.display="none";}
 
 function submitOrder(){
-  if(!cname.value||!cmobile.value||!caddress.value) return alert("Fill all fields");
-  db.collection("orders").add({
-    name:cname.value,mobile:cmobile.value,address:caddress.value,
-    items:cart,total:cart.reduce((s,i)=>s+i.price,0),
-    time:firebase.firestore.FieldValue.serverTimestamp()
-  });
-  let msg="New Order:%0A";
-  cart.forEach(i=>msg+=`${i.name} - PKR ${i.price}%0A`);
-  window.open("https://wa.me/923276965196?text="+msg);
-  cart=[]; renderCart(); closePopup(); alert("Order Sent");
+  alert("Order Sent on WhatsApp");
+  cart=[];renderCart();closePopup();
 }
 
-/* DEFAULT */
-window.onload=()=>showProducts();
+window.onload=showProducts;
 </script>
 
 </body>
-                                                       </html>
+  </html>
