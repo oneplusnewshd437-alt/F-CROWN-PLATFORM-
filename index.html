@@ -7,153 +7,133 @@
 
 <style>
 /* GENERAL */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
 }
 
 /* HEADER */
-header img {
-  width: 100%;
-  max-height: 350px;
-  object-fit: cover;
+header img{
+  width:100%;
+  max-height:350px;
+  object-fit:cover;
 }
 
-/* NAVIGATION */
-nav {
-  background: #000;
-  padding: 12px;
-  text-align: center;
+/* NAV */
+nav{
+  background:#000;
+  padding:12px;
+  text-align:center;
 }
-nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
+nav a{
+  color:#fff;
+  margin:0 15px;
+  text-decoration:none;
+  font-weight:bold;
 }
-nav a:hover {
-  color: red;
-}
+nav a:hover{color:red}
 
 /* CONTAINER */
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-}
-
-/* LOGIN */
-#loginBox {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  max-width: 350px;
-  margin: 20px auto;
-  display: none;
-}
-
-/* ADMIN PANEL */
-.admin {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  display: none;
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
 }
 
 /* PRODUCTS GRID */
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
-/* PRODUCT CARD */
-.card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 12px;
-  border: 2px solid red;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* CARD (ALL PRODUCTS) */
+.card,.product-card{
+  background:#fff;
+  border-radius:12px;
+  padding:12px;
+  border:2px solid red;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
 
-/* PRODUCT IMAGE FIXED SIZE */
-.card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 10px;
-  background: #eee;
+/* IMAGE FIX */
+.card img,
+.product-card img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid #ddd;
+  background:#eee;
 }
 
-/* PRICE */
-.price {
-  font-weight: bold;
-  margin: 6px 0;
+/* TEXT */
+.price{
+  font-weight:bold;
+  margin:6px 0;
+}
+.desc{
+  font-size:14px;
+  line-height:1.4;
 }
 
-/* BUTTON */
-.btn {
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  width: 100%;
+/* BUTTONS */
+.btn,.buy-btn{
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  width:100%;
+  background:red;
+  color:#fff;
 }
-.buy {
-  background: red;
-  color: #fff;
-}
-.buy:hover {
-  background: #c40000;
+.btn:hover,.buy-btn:hover{
+  background:#c40000;
 }
 
 /* CART */
-#cartBox {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  display: none;
+#cartBox{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  display:none;
 }
-.cartItem {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0;
+.cartItem{
+  display:flex;
+  justify-content:space-between;
+  margin:6px 0;
 }
 
 /* POPUP */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
+.popup{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
 }
-.popupBox {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
+.popupBox{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  width:90%;
+  max-width:400px;
 }
 
 /* FOOTER */
-footer {
-  background: #111;
-  color: #ccc;
-  text-align: center;
-  padding: 15px;
-  margin-top: 20px;
-  display: none;
+footer{
+  background:#111;
+  color:#ccc;
+  text-align:center;
+  padding:15px;
+  margin-top:20px;
 }
 </style>
 </head>
@@ -161,65 +141,55 @@ footer {
 <body>
 
 <header>
-  <img src="1769020865804.jpg" alt="Store Banner">
+  <img src="1769020865804.jpg">
 </header>
 
 <nav>
   <a href="#" onclick="showProducts()">Products</a>
   <a href="#" onclick="showCart()">Cart</a>
   <a href="#" onclick="showContact()">Contact</a>
-  <a href="#" onclick="showAdmin()">Admin</a>
 </nav>
 
 <div class="container">
 
-  <!-- LOGIN -->
-  <div id="loginBox">
-    <h3>Admin Login</h3>
-    <input id="adminPass" placeholder="Password">
-    <button class="btn buy" onclick="login()">Login</button>
-  </div>
+<!-- PRODUCTS -->
+<div id="productSection">
+<h2>Products</h2>
 
-  <!-- ADMIN PANEL -->
-  <div class="admin" id="adminPanel">
-    <h3>Add Product</h3>
-    <input id="pname" placeholder="Product Name"><br><br>
-    <input id="pprice" type="number" placeholder="Price PKR"><br><br>
-    <input id="pimage" type="file"><br><br>
-    <button class="btn buy" onclick="addProduct()">Upload Product</button>
-  </div>
+<div class="products">
 
-  <!-- PRODUCTS -->
-  <div id="productSection">
-    <h2>Products</h2>
-    <div class="products" id="productList">
-      <!-- STATIC PRODUCT 1 -->
-      <div class="card">
-        <img src="Screenshot_20260122-152453.jpg" alt="Jewelry Gift Set">
-        <h3>Jewelry Gift Set 🔥</h3>
-        <p class="price">PKR 950</p>
-        <p>Bangles, Earrings, Pendant, Bracelet,<br>
-        Lip gloss, Eye pencil, Candies, Card<br>
-        <b>Limited Offer</b></p>
-        <button class="btn buy" onclick="addToCart('Jewelry Gift Set',950)">Add to Cart</button>
-      </div>
+<!-- PRODUCT 1 -->
+<div class="card">
+  <img src="Screenshot_20260122-152453.jpg">
+  <h3>Jewelry Gift Set 🔥</h3>
+  <p class="price">PKR 950</p>
+  <p>
+    Bangles, Earrings, Pendant, Bracelet<br>
+    Lip gloss, Eye pencil, Candies, Card<br>
+    <b>Limited Offer</b>
+  </p>
+  <button class="btn" onclick="addToCart('Jewelry Gift Set',950)">Add to Cart</button>
+</div>
 
-      <!-- STATIC PRODUCT 2 (From Announcement) -->
-      <div class="card">
-        <img src="20260122_181733-COLLAGE.jpg" alt="Winter Fleece Sweatshirts">
-        <h3>Winter Fleece Sweatshirts</h3>
-        <p class="price">PKR 1399</p>
-        <button class="btn buy" onclick="addToCart('Winter Fleece Sweatshirts',1399)">Add to Cart</button>
-      </div>
-    </div>
-    <div class="card">
-  <img src="20260122_181837-COLLAGE.jpg" alt="2pc Unstitch Dresses Collection">
+<!-- PRODUCT 2 -->
+<div class="card">
+  <img src="20260122_181733-COLLAGE.jpg">
+  <h3>Winter Fleece Sweatshirts</h3>
+  <p class="price">PKR 1399</p>
+  <button class="btn" onclick="addToCart('Winter Fleece Sweatshirts',1399)">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 3 -->
+<div class="card">
+  <img src="20260122_181837-COLLAGE.jpg">
   <h3>2pc Unstitch Dresses Collection</h3>
   <p class="price">PKR 1599</p>
-  <button class="btn buy" onclick="addToCart('2pc Unstitch Dresses Collection',1599)">Add to Cart</button>
+  <button class="btn" onclick="addToCart('2pc Unstitch Dresses Collection',1599)">Add to Cart</button>
 </div>
-    <div class="product-card">
-  <img src="Alig00.jpg" alt="JBi Kids Name Bracelet">
+
+<!-- PRODUCT 4 -->
+<div class="product-card">
+  <img src="Alig00.jpg">
   <h3>JBi Kids Name Bracelet ✨</h3>
   <p class="desc">
     🌟 Specially Designed for Kids<br>
@@ -227,162 +197,88 @@ footer {
     🌟 Golden Color Available
   </p>
   <p class="price">PKR 750</p>
-  <button class="buy-btn">Order Now</button>
-    </div>
-  </div>
+  <button class="buy-btn" onclick="addToCart('JBi Kids Name Bracelet',750)">Add to Cart</button>
+</div>
 
-  <!-- CART -->
-  <div id="cartBox">
-    <h3>Cart</h3>
-    <div id="cartItems"></div>
-    <h4>Total: PKR <span id="totalPrice">0</span></h4>
-    <button class="btn buy" onclick="checkout()">Checkout</button>
-  </div>
+</div>
+</div>
+
+<!-- CART -->
+<div id="cartBox">
+  <h3>Cart</h3>
+  <div id="cartItems"></div>
+  <h4>Total: PKR <span id="totalPrice">0</span></h4>
+  <button class="btn" onclick="checkout()">Checkout</button>
+</div>
 
 </div>
 
-<!-- CONTACT -->
 <footer id="contact">
-  <p>Contact: 0327-6965196</p>
-  <p>© 2026 F Crown</p>
+<p>Contact: 0327-6965196</p>
+<p>© 2026 F Crown</p>
 </footer>
 
 <!-- POPUP -->
 <div class="popup" id="orderPopup">
-  <div class="popupBox">
-    <h3>Place Order</h3>
-    <input id="cname" placeholder="Your Name"><br><br>
-    <input id="cmobile" placeholder="Mobile Number"><br><br>
-    <textarea id="caddress" placeholder="Address"></textarea><br><br>
-    <button class="btn buy" onclick="submitOrder()">Submit</button>
-    <button class="btn" onclick="closePopup()">Cancel</button>
-  </div>
+<div class="popupBox">
+<h3>Place Order</h3>
+<input id="cname" placeholder="Your Name"><br><br>
+<input id="cmobile" placeholder="Mobile Number"><br><br>
+<textarea id="caddress" placeholder="Address"></textarea><br><br>
+<button class="btn" onclick="submitOrder()">Submit</button>
+<button class="btn" onclick="closePopup()">Cancel</button>
+</div>
 </div>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
-
 <script>
-const firebaseConfig = {
-  apiKey: "PASTE_HERE",
-  authDomain: "PASTE_HERE",
-  projectId: "PASTE_HERE",
-  storageBucket: "PASTE_HERE",
-  messagingSenderId: "PASTE_HERE",
-  appId: "PASTE_HERE"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db=firebase.firestore();
-const storage=firebase.storage();
-
-const ADMIN_PASSWORD="12345";
 let cart=[];
 
-function hideAll(){
-  document.getElementById('productSection').style.display="none";
+function showProducts(){
+  document.getElementById('productSection').style.display="block";
   document.getElementById('cartBox').style.display="none";
   document.getElementById('contact').style.display="none";
-  document.getElementById('adminPanel').style.display="none";
-  document.getElementById('loginBox').style.display="none";
+}
+function showCart(){
+  document.getElementById('productSection').style.display="none";
+  document.getElementById('cartBox').style.display="block";
+}
+function showContact(){
+  document.getElementById('productSection').style.display="none";
+  document.getElementById('cartBox').style.display="none";
+  document.getElementById('contact').style.display="block";
 }
 
-function showProducts(){hideAll(); document.getElementById('productSection').style.display="block";}
-function showCart(){hideAll(); document.getElementById('cartBox').style.display="block";}
-function showContact(){hideAll(); document.getElementById('contact').style.display="block";}
-function showAdmin(){hideAll(); document.getElementById('loginBox').style.display="block";}
-
-function login(){
-  const adminPass = document.getElementById('adminPass');
-  if(adminPass.value===ADMIN_PASSWORD){
-    hideAll();
-    document.getElementById('adminPanel').style.display="block";
-    document.getElementById('productSection').style.display="block";
-  }else alert("Wrong Password");
+function addToCart(n,p){
+  cart.push({n,p});
+  renderCart();
 }
-
-function addProduct(){
-  const pname=document.getElementById('pname');
-  const pprice=document.getElementById('pprice');
-  const pimage=document.getElementById('pimage');
-  if(!pname.value||!pprice.value||!pimage.files[0]) return alert("Fill all fields");
-
-  let file=pimage.files[0];
-  let ref=storage.ref("products/"+Date.now()+file.name);
-  ref.put(file).then(s=>s.ref.getDownloadURL().then(url=>{
-    db.collection("products").add({
-      name:pname.value,
-      price:Number(pprice.value),
-      image:url,
-      time:firebase.firestore.FieldValue.serverTimestamp()
-    });
-  }));
-
-  pname.value=pprice.value=pimage.value="";
-}
-
-// Fetch products from Firebase
-db.collection("products").orderBy("time","desc").onSnapshot(snap=>{
-  const productList=document.getElementById('productList');
-  productList.innerHTML="";
-  // Keep static products
-  productList.innerHTML+=`
-    <div class="card">
-      <img src="Screenshot_20260122-152453.jpg" alt="Jewelry Gift Set">
-      <h3>Jewelry Gift Set 🔥</h3>
-      <p class="price">PKR 950</p>
-      <p>Bangles, Earrings, Pendant, Bracelet,<br>
-      Lip gloss, Eye pencil, Candies, Card<br>
-      <b>Limited Offer</b></p>
-      <button class="btn buy" onclick="addToCart('Jewelry Gift Set',950)">Add to Cart</button>
-    </div>
-    <div class="card">
-      <img src="20260122_181733-COLLAGE.jpg" alt="Winter Fleece Sweatshirts">
-      <h3>Winter Fleece Sweatshirts</h3>
-      <p class="price">PKR 1399</p>
-      <button class="btn buy" onclick="addToCart('Winter Fleece Sweatshirts',1399)">Add to Cart</button>
-    </div>
-  `;
-  snap.forEach(doc=>{
-    let d=doc.data();
-    productList.innerHTML+=`
-    <div class="card">
-      <img src="${d.image}" alt="${d.name}">
-      <h3>${d.name}</h3>
-      <p class="price">PKR ${d.price}</p>
-      <button class="btn buy" onclick="addToCart('${d.name}',${d.price})">Add to Cart</button>
-    </div>`;
-  });
-});
-
-// CART FUNCTIONS
-function addToCart(n,p){cart.push({n,p}); renderCart(); }
 function renderCart(){
-  const cartItems=document.getElementById('cartItems');
-  const totalPrice=document.getElementById('totalPrice');
-  cartItems.innerHTML="";
+  let box=document.getElementById('cartItems');
+  let total=document.getElementById('totalPrice');
+  box.innerHTML="";
   let t=0;
   cart.forEach(i=>{
     t+=i.p;
-    cartItems.innerHTML+=`<div class="cartItem"><span>${i.n}</span><span>PKR ${i.p}</span></div>`;
+    box.innerHTML+=`<div class="cartItem"><span>${i.n}</span><span>PKR ${i.p}</span></div>`;
   });
-  totalPrice.innerText=t;
+  total.innerText=t;
 }
 function checkout(){
   if(cart.length==0) alert("Cart empty");
   else document.getElementById('orderPopup').style.display="flex";
 }
-function closePopup(){document.getElementById('orderPopup').style.display="none";}
+function closePopup(){
+  document.getElementById('orderPopup').style.display="none";
+}
 function submitOrder(){
-  alert("Order Sent on WhatsApp");
-  cart=[]; renderCart(); closePopup();
+  alert("Order Sent Successfully");
+  cart=[];
+  renderCart();
+  closePopup();
 }
 
-// SHOW PRODUCTS ON PAGE LOAD
 window.onload=showProducts;
 </script>
 
 </body>
-      </html>
+    </html>
