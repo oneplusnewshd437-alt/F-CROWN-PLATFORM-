@@ -155,34 +155,6 @@ footer {
   margin-top: 20px;
   display: none;
 }
-
-/* ANNOUNCEMENT BAR */
-#announcement-bar {
-  background: #fff;
-  border: 2px solid #f00;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-#announcement-bar img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-#announcement-text {
-  flex: 1;
-  font-weight: bold;
-}
-#close-btn {
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
 </style>
 </head>
 
@@ -217,18 +189,11 @@ footer {
     <button class="btn buy" onclick="addProduct()">Upload Product</button>
   </div>
 
-  <!-- ANNOUNCEMENT -->
-  <div id="announcement-bar">
-    <img src="20260122_181733-COLLAGE.jpg" alt="Winter Fleece Sweatshirts">
-    <div id="announcement-text">Winter Fleece Sweatshirts - Price: ₹1399</div>
-    <button id="close-btn" onclick="document.getElementById('announcement-bar').style.display='none'">&times;</button>
-  </div>
-
   <!-- PRODUCTS -->
   <div id="productSection">
     <h2>Products</h2>
     <div class="products" id="productList">
-      <!-- STATIC PRODUCT -->
+      <!-- STATIC PRODUCT 1 -->
       <div class="card">
         <img src="Screenshot_20260122-152453.jpg" alt="Jewelry Gift Set">
         <h3>Jewelry Gift Set 🔥</h3>
@@ -237,6 +202,14 @@ footer {
         Lip gloss, Eye pencil, Candies, Card<br>
         <b>Limited Offer</b></p>
         <button class="btn buy" onclick="addToCart('Jewelry Gift Set',950)">Add to Cart</button>
+      </div>
+
+      <!-- STATIC PRODUCT 2 (From Announcement) -->
+      <div class="card">
+        <img src="20260122_181733-COLLAGE.jpg" alt="Winter Fleece Sweatshirts">
+        <h3>Winter Fleece Sweatshirts</h3>
+        <p class="price">PKR 1399</p>
+        <button class="btn buy" onclick="addToCart('Winter Fleece Sweatshirts',1399)">Add to Cart</button>
       </div>
     </div>
   </div>
@@ -337,6 +310,24 @@ function addProduct(){
 db.collection("products").orderBy("time","desc").onSnapshot(snap=>{
   const productList=document.getElementById('productList');
   productList.innerHTML="";
+  // Keep static products
+  productList.innerHTML+=`
+    <div class="card">
+      <img src="Screenshot_20260122-152453.jpg" alt="Jewelry Gift Set">
+      <h3>Jewelry Gift Set 🔥</h3>
+      <p class="price">PKR 950</p>
+      <p>Bangles, Earrings, Pendant, Bracelet,<br>
+      Lip gloss, Eye pencil, Candies, Card<br>
+      <b>Limited Offer</b></p>
+      <button class="btn buy" onclick="addToCart('Jewelry Gift Set',950)">Add to Cart</button>
+    </div>
+    <div class="card">
+      <img src="20260122_181733-COLLAGE.jpg" alt="Winter Fleece Sweatshirts">
+      <h3>Winter Fleece Sweatshirts</h3>
+      <p class="price">PKR 1399</p>
+      <button class="btn buy" onclick="addToCart('Winter Fleece Sweatshirts',1399)">Add to Cart</button>
+    </div>
+  `;
   snap.forEach(doc=>{
     let d=doc.data();
     productList.innerHTML+=`
@@ -377,4 +368,4 @@ window.onload=showProducts;
 </script>
 
 </body>
-  </html>
+      </html>
