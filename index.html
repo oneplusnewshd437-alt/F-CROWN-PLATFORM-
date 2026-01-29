@@ -5,7 +5,7 @@
   <title>Roznama Baseerat | Daily News</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Urdu Font (optional but recommended) -->
+  <!-- Urdu Font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
 
   <style>
@@ -16,21 +16,27 @@
       color:#000;
       direction: rtl;
     }
+
+    /* HEADER */
     header{
       background:#fff;
       border-bottom:3px solid #000;
-      padding:20px;
+      padding:15px 10px;
       text-align:center;
     }
-    header h1{
-      margin:0;
-      font-size:42px;
-      font-weight:bold;
+
+    .site-logo{
+      max-width:360px;   /* desktop size */
+      width:100%;        /* mobile auto adjust */
+      height:auto;
     }
+
     header p{
-      margin:5px 0 0;
+      margin:8px 0 0;
       font-size:14px;
     }
+
+    /* NAV */
     nav{
       background:#000;
       padding:10px;
@@ -45,6 +51,8 @@
     nav a:hover{
       text-decoration:underline;
     }
+
+    /* MAIN */
     .container{
       max-width:1200px;
       margin:auto;
@@ -53,6 +61,7 @@
       grid-template-columns:3fr 1fr;
       gap:20px;
     }
+
     .news{
       background:#fff;
       padding:15px;
@@ -79,6 +88,8 @@
       line-height:1.9;
       margin:0;
     }
+
+    /* SIDEBAR */
     .sidebar{
       background:#fff;
       padding:15px;
@@ -101,6 +112,8 @@
     .sidebar ul li:last-child{
       border-bottom:none;
     }
+
+    /* FOOTER */
     footer{
       background:#000;
       color:#fff;
@@ -109,13 +122,24 @@
       margin-top:20px;
       font-size:14px;
     }
+
+    /* MOBILE */
+    @media(max-width:768px){
+      .container{
+        grid-template-columns:1fr;
+      }
+      .site-logo{
+        max-width:260px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
 <header>
-  <h1>روزنامہ بصیرت</h1>
+  <!-- LOGO IMAGE -->
+  <img src="untitled-1769458125072.jpeg" alt="Roznama Baseerat" class="site-logo">
   <p>سچ کی آواز | Daily Newspaper</p>
 </header>
 
@@ -130,40 +154,37 @@
 
 <div class="container">
 
-  <!-- News Section -->
   <div class="news">
     <h2>اہم خبریں</h2>
 
     <article>
       <h3>یہاں اپنی خبر کا عنوان لکھیں</h3>
       <p>
-        یہاں مکمل خبر لکھیں۔ یہ ویب سائٹ اخباری انداز میں تیار کی گئی ہے تاکہ آپ آسانی سے روزنامہ کی خبریں اپلوڈ کر سکیں۔
+        یہاں مکمل خبر لکھیں۔ یہ ویب سائٹ اخباری انداز میں تیار کی گئی ہے تاکہ آپ آسانی سے خبریں اپلوڈ کر سکیں۔
       </p>
     </article>
 
     <article>
       <h3>دوسری اہم خبر</h3>
       <p>
-        خبر کی تفصیل یہاں شامل کریں۔ آپ روزانہ نئی خبریں شامل کر سکتے ہیں اور اپنی ویب سائٹ کو باقاعدہ اپڈیٹ رکھ سکتے ہیں۔
+        آپ روزانہ نئی خبریں شامل کر سکتے ہیں اور اپنی ویب سائٹ کو باقاعدہ اپڈیٹ رکھ سکتے ہیں۔
       </p>
     </article>
 
     <article>
-      <h3>تیسری خبر کا عنوان</h3>
+      <h3>تیسری خبر</h3>
       <p>
-        روزنامہ بصیرت آپ کو ملکی و بین الاقوامی خبروں سے باخبر رکھنے کے لیے پرعزم ہے۔
+        روزنامہ بصیرت آپ کو ملکی و بین الاقوامی خبروں سے باخبر رکھتا ہے۔
       </p>
     </article>
-
   </div>
 
-  <!-- Sidebar -->
   <aside class="sidebar">
     <h3>تازہ ترین</h3>
     <ul>
       <li>اہم قومی خبر</li>
       <li>سیاسی صورتحال</li>
-      <li>موسم کی تازہ رپورٹ</li>
+      <li>موسم کی رپورٹ</li>
       <li>کھیلوں کی خبریں</li>
       <li>کاروباری اپڈیٹ</li>
     </ul>
@@ -176,4 +197,4 @@
 </footer>
 
 </body>
-        </html>
+</html>
