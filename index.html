@@ -8,8 +8,9 @@
   <!-- Urdu Font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
 
-  <!-- jsPDF library for PDF download -->
+  <!-- jsPDF library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
     body{
@@ -20,7 +21,6 @@
       direction: rtl;
     }
 
-    /* HEADER LOGO */
     header{
       text-align:center;
       margin:0;
@@ -32,7 +32,6 @@
       display:block;
     }
 
-    /* NAVIGATION */
     nav{
       background:#000;
       padding:10px;
@@ -53,7 +52,6 @@
       color:red;
     }
 
-    /* MAIN CONTAINER */
     .container{
       max-width:1200px;
       margin:auto;
@@ -63,7 +61,6 @@
       gap:20px;
     }
 
-    /* NEWS SECTION */
     .news{
       display:flex;
       flex-direction:column;
@@ -76,14 +73,16 @@
       border-bottom:2px solid #ccc;
     }
 
-    /* HEADLINE */
     .headline{
-      font-size:24px;
+      font-size:22px;
       font-weight:bold;
       padding:5px 10px;
       background:#000;
       color:#fff;
       margin-bottom:10px;
+      white-space: nowrap;      /* single line */
+      overflow: hidden;         /* cut overflow */
+      text-overflow: ellipsis;  /* add ... if too long */
     }
 
     .news img{
@@ -103,7 +102,6 @@
       margin-bottom:10px;
     }
 
-    /* SHARE & PDF BUTTONS */
     .news-footer{
       display:flex;
       flex-wrap:wrap;
@@ -123,7 +121,6 @@
     .whatsapp{ background:#25D366; }
     .pdf-btn{ background:#000; }
 
-    /* SIDEBAR */
     .sidebar{
       background:#fff;
       padding:15px;
@@ -148,7 +145,6 @@
       border-bottom:none;
     }
 
-    /* FOOTER */
     footer{
       background:#000;
       color:#fff;
@@ -165,18 +161,17 @@
     @media(max-width:768px){
       .container{ grid-template-columns:1fr; }
       .news-footer{ flex-direction:column; }
+      .headline{ font-size:18px; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
   <img src="untitled-1769458125072.jpeg" alt="Roznama Baseerat" class="site-logo">
 </header>
 
-<!-- NAVIGATION -->
 <nav>
   <a href="#">سرخیاں</a>
   <a href="#">پاکستان</a>
@@ -186,24 +181,17 @@
   <a href="#">کالم</a>
 </nav>
 
-<!-- MAIN CONTENT -->
 <div class="container">
 
-  <!-- NEWS SECTION -->
   <div class="news">
 
-    <!-- FIRST NEWS -->
     <article id="news1">
-      <div class="headline">خیرپور پولیس کا کچے کے ڈاکوؤں کی سھولتکاری کرنے والوں کا گھیراؤ تنگ، کچے کے ڈاکوؤں کا علاج اور سہولتکاری کرنے والا عطائی ڈاکٹر گرفتار مقدمہ درج</div>
+      <div class="headline">خیرپور پولیس کا کچے کے ڈاکوؤں کی سہولتکاری کرنے والوں کا گھیراؤ</div>
       <img src="IMG-20260127-WA0089.jpg" alt="خیرپور پولیس خبر">
       <p class="bureau">(بیورو رپورٹ حب علی جھانگر)</p>
       <p>ایس ایچ او تھانہ فیض محمد بنڈو کی وفاقی سول انٹیلیجنس ادارے کی خفیہ اطلاع پر کاروائی</p>
       <p>پولیس ٹیم نے وفاقی سول انٹیلیجنس ادارے کی مخفی اطلاع پر کاروائی کرکہ ڈاکوؤں کا علاج اور اسلحہ مہیا کرنے والے ملزم <strong>محمد عابد ولد مراد علی سولنگی</strong> کو گرفتار کر لیا اور مقدمہ درج کیا۔</p>
-      <p><strong>FIR. NO. 04/2026 u/s 216A,212, 230B,PS FM NAREJO</strong><br>
-         <strong>FIR. NO.05/2026 u/s 23(1)B PS FM NAREJO</strong></p>
-      <p>یاد رہے کہ گرفتار ملزم کچے کے ڈاکوؤں کا علاج کرکہ اسلحہ پہنچاتا تھا اور لوگوں کو ڈاکوؤں کا پیغام پہنچا کر خوفزدہ کرتا تھا۔</p>
 
-      <!-- SHARE & PDF -->
       <div class="news-footer">
         <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://YOURWEBSITE.com" target="_blank">Facebook Share</a>
         <a class="whatsapp" href="https://api.whatsapp.com/send?text=Check this news: https://YOURWEBSITE.com" target="_blank">WhatsApp Share</a>
@@ -211,21 +199,8 @@
       </div>
     </article>
 
-    <!-- SECOND NEWS -->
-    <article id="news2">
-      <div class="headline">دوسری اہم خبر</div>
-      <p>آپ روزانہ نئی خبریں شامل کر سکتے ہیں اور اپنی ویب سائٹ کو باقاعدہ اپڈیٹ رکھ سکتے ہیں۔</p>
-
-      <div class="news-footer">
-        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://YOURWEBSITE.com" target="_blank">Facebook Share</a>
-        <a class="whatsapp" href="https://api.whatsapp.com/send?text=Check this news: https://YOURWEBSITE.com" target="_blank">WhatsApp Share</a>
-        <button class="pdf-btn" onclick="downloadNewsPDF('news2','Roznama_Baseerat_News2.pdf')">Download PDF</button>
-      </div>
-    </article>
-
   </div>
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <h3>تازہ ترین</h3>
     <ul>
@@ -239,7 +214,6 @@
 
 </div>
 
-<!-- FOOTER -->
 <footer>
   © 2026 روزنامہ بصیرت — تمام حقوق محفوظ ہیں
   <div class="phone">📞 03491441853</div>
@@ -249,15 +223,18 @@
   const { jsPDF } = window.jspdf;
 
   function downloadNewsPDF(articleId, fileName){
-    const doc = new jsPDF({orientation:'portrait', unit:'pt', format:'a4'});
     const element = document.getElementById(articleId);
-    doc.html(element,{
-      callback:function(doc){ doc.save(fileName); },
-      x:10, y:10,
-      html2canvas:{ scale:0.5 }
+    html2canvas(element, {scale:2}).then(canvas=>{
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p','pt','a4');
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(fileName);
     });
   }
 </script>
 
 </body>
-  </html>
+    </html>
