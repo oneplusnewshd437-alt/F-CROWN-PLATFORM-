@@ -13,7 +13,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
-    /* GENERAL */
     *{box-sizing:border-box;}
     body{
       margin:0;
@@ -39,7 +38,6 @@
       padding:10px 0;
     }
 
-    /* NAVIGATION */
     nav{
       background:#000;
       padding:12px 0;
@@ -61,7 +59,6 @@
       text-decoration:underline;
     }
 
-    /* MAIN CONTAINER */
     .container{
       max-width:1200px;
       margin:auto;
@@ -71,7 +68,6 @@
       gap:20px;
     }
 
-    /* NEWS ARTICLES */
     .news{
       display:flex;
       flex-direction:column;
@@ -113,7 +109,6 @@
       margin-bottom:10px;
     }
 
-    /* NEWS FOOTER */
     .news-footer{
       display:flex;
       flex-wrap:wrap;
@@ -137,7 +132,6 @@
     .whatsapp{ background:#25D366; }
     .pdf-btn{ background:#000; }
 
-    /* SIDEBAR */
     .sidebar{
       background:#fff;
       padding:15px;
@@ -164,7 +158,6 @@
       border-bottom:none;
     }
 
-    /* FOOTER */
     footer{
       background:#000;
       color:#fff;
@@ -178,7 +171,6 @@
       font-size:14px;
     }
 
-    /* RESPONSIVE */
     @media(max-width:1024px){
       .container{ grid-template-columns:2fr 1fr; gap:15px; }
       .headline{ font-size:20px; }
@@ -254,7 +246,27 @@
 
   function downloadNewsPDF(articleId, fileName){
     const element = document.getElementById(articleId);
-    html2canvas(element, {scale:2, useCORS:true}).then(canvas=>{
+    const logoSrc = "untitled-1769458125072.jpeg"; // لوگو کا راستہ
+
+    // ایک temporary div بنائیں لوگو کے ساتھ
+    const tempDiv = document.createElement('div');
+    tempDiv.style.width = element.scrollWidth + "px";
+    tempDiv.style.padding = "10px";
+    tempDiv.style.background = "#fff";
+
+    // لوگو شامل کریں
+    const logoImg = document.createElement('img');
+    logoImg.src = logoSrc;
+    logoImg.style.width = "150px";
+    logoImg.style.display = "block";
+    logoImg.style.margin = "0 auto 15px auto";
+    tempDiv.appendChild(logoImg);
+
+    // آرٹیکل کلون کریں
+    const clone = element.cloneNode(true);
+    tempDiv.appendChild(clone);
+
+    html2canvas(tempDiv, {scale:2, useCORS:true, scrollY: -window.scrollY}).then(canvas=>{
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p','pt','a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -266,4 +278,4 @@
 </script>
 
 </body>
-    </html>
+</html>
