@@ -8,6 +8,9 @@
   <!-- Urdu Font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
 
+  <!-- jsPDF library for PDF download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
     body{
       margin:0;
@@ -17,7 +20,7 @@
       direction: rtl;
     }
 
-    /* HEADER LOGO */
+    /* HEADER LOGO (unchanged) */
     header{
       text-align:center;
       margin:0;
@@ -119,6 +122,19 @@
       background:#25D366;
     }
 
+    /* PDF DOWNLOAD BUTTON */
+    .download-btn{
+      display:inline-block;
+      margin-top:15px;
+      padding:8px 16px;
+      background:#000;
+      color:#fff;
+      border-radius:4px;
+      text-decoration:none;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
     /* SIDEBAR */
     .sidebar{
       background:#fff;
@@ -184,8 +200,13 @@
   <a href="#">کالم</a>
 </nav>
 
+<!-- DOWNLOAD PDF BUTTON -->
+<div style="text-align:center; margin:15px;">
+  <button class="download-btn" onclick="downloadPDF()">Download Newspaper PDF</button>
+</div>
+
 <!-- MAIN CONTENT -->
-<div class="container">
+<div class="container" id="newspaper">
 
   <!-- NEWS SECTION -->
   <div class="news">
@@ -215,12 +236,24 @@
     <article>
       <div class="headline">دوسری اہم خبر</div>
       <p>آپ روزانہ نئی خبریں شامل کر سکتے ہیں اور اپنی ویب سائٹ کو باقاعدہ اپڈیٹ رکھ سکتے ہیں۔</p>
+
+      <!-- SHARE BUTTONS -->
+      <div class="share-buttons">
+        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://YOURWEBSITE.com" target="_blank">Facebook Share</a>
+        <a class="whatsapp" href="https://api.whatsapp.com/send?text=Check this news: https://YOURWEBSITE.com" target="_blank">WhatsApp Share</a>
+      </div>
     </article>
 
     <!-- THIRD NEWS -->
     <article>
       <div class="headline">تیسری خبر</div>
       <p>روزنامہ بصیرت آپ کو ملکی و بین الاقوامی خبروں سے باخبر رکھتا ہے۔</p>
+
+      <!-- SHARE BUTTONS -->
+      <div class="share-buttons">
+        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://YOURWEBSITE.com" target="_blank">Facebook Share</a>
+        <a class="whatsapp" href="https://api.whatsapp.com/send?text=Check this news: https://YOURWEBSITE.com" target="_blank">WhatsApp Share</a>
+      </div>
     </article>
 
   </div>
@@ -243,6 +276,27 @@
 <footer>
   © 2026 روزنامہ بصیرت — تمام حقوق محفوظ ہیں
 </footer>
+
+<!-- PDF DOWNLOAD SCRIPT -->
+<script>
+function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({
+    orientation: "portrait",
+    unit: "pt",
+    format: "a4"
+  });
+
+  doc.html(document.getElementById("newspaper"), {
+    callback: function(doc) {
+      doc.save("Roznama_Baseerat.pdf");
+    },
+    x: 10,
+    y: 10,
+    html2canvas: { scale: 0.5 }
+  });
+}
+</script>
 
 </body>
   </html>
