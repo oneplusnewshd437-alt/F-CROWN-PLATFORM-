@@ -23,7 +23,6 @@
       line-height:1.7;
     }
 
-    /* Website Top Header Logo - Full Width Responsive */
     header{
       text-align:center;
       margin:0;
@@ -190,8 +189,8 @@
 <body>
 
 <header>
-  <!-- Website Full Width Logo -->
-  <img src="untitled-1769732497438.jpeg" alt="Roznama Baseerat" class="site-logo">
+  <!-- ویب سائٹ لوگو (صرف ویب سائٹ پر) -->
+  <img src="untitled-1769458125072.jpeg" alt="Roznama Baseerat" class="site-logo">
 </header>
 
 <nav>
@@ -247,15 +246,15 @@
   function downloadNewsPDF(articleId, fileName){
     const element = document.getElementById(articleId);
 
-    // PDF میں ویب سائٹ لوگو (news paper style) شامل کریں
-    const pdfLogoSrc = "untitled-1769732497438.jpeg"; // PDF logo
+    // PDF کے لیے الگ لوگو (صرف download پر)
+    const pdfLogoSrc = "untitled-1769732497438.jpeg";
 
     const tempDiv = document.createElement('div');
     tempDiv.style.width = "100%";
     tempDiv.style.padding = "20px";
     tempDiv.style.background = "#fff";
 
-    // لوگو پورے width کے ساتھ شامل کریں
+    // PDF لوگو شامل کریں
     const logoImg = document.createElement('img');
     logoImg.src = pdfLogoSrc;
     logoImg.style.width = "100%";
@@ -275,10 +274,10 @@
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(fileName); // Mobile میں download ہو جائے گا
+      pdf.save(fileName);
     });
   }
 </script>
 
 </body>
-    </html>
+  </html>
