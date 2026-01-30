@@ -23,6 +23,7 @@
       line-height:1.7;
     }
 
+    /* Website Top Header Logo - Full Width Responsive */
     header{
       text-align:center;
       margin:0;
@@ -31,11 +32,9 @@
     }
     .site-logo{
       width:100%;
-      max-width:250px;
       height:auto;
       display:block;
-      margin:auto;
-      padding:10px 0;
+      object-fit:cover;
     }
 
     nav{
@@ -191,7 +190,8 @@
 <body>
 
 <header>
-  <img src="untitled-1769458125072.jpeg" alt="Roznama Baseerat" class="site-logo">
+  <!-- Website Full Width Logo -->
+  <img src="untitled-1769732497438.jpeg" alt="Roznama Baseerat" class="site-logo">
 </header>
 
 <nav>
@@ -246,36 +246,39 @@
 
   function downloadNewsPDF(articleId, fileName){
     const element = document.getElementById(articleId);
-    const logoSrc = "untitled-1769458125072.jpeg"; // لوگو کا راستہ
 
-    // ایک temporary div بنائیں لوگو کے ساتھ
+    // PDF میں ویب سائٹ لوگو (news paper style) شامل کریں
+    const pdfLogoSrc = "untitled-1769732497438.jpeg"; // PDF logo
+
     const tempDiv = document.createElement('div');
-    tempDiv.style.width = element.scrollWidth + "px";
-    tempDiv.style.padding = "10px";
+    tempDiv.style.width = "100%";
+    tempDiv.style.padding = "20px";
     tempDiv.style.background = "#fff";
 
-    // لوگو شامل کریں
+    // لوگو پورے width کے ساتھ شامل کریں
     const logoImg = document.createElement('img');
-    logoImg.src = logoSrc;
-    logoImg.style.width = "150px";
+    logoImg.src = pdfLogoSrc;
+    logoImg.style.width = "100%";
+    logoImg.style.height = "auto";
     logoImg.style.display = "block";
-    logoImg.style.margin = "0 auto 15px auto";
+    logoImg.style.marginBottom = "20px";
     tempDiv.appendChild(logoImg);
 
     // آرٹیکل کلون کریں
     const clone = element.cloneNode(true);
     tempDiv.appendChild(clone);
 
+    // PDF generate کریں
     html2canvas(tempDiv, {scale:2, useCORS:true, scrollY: -window.scrollY}).then(canvas=>{
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p','pt','a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(fileName);
+      pdf.save(fileName); // Mobile میں download ہو جائے گا
     });
   }
 </script>
 
 </body>
-</html>
+    </html>
