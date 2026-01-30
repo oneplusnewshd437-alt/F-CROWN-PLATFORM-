@@ -23,17 +23,20 @@
       line-height:1.7;
     }
 
-    header{
-      text-align:center;
-      margin:0;
-      padding:0;
-      background:#fff;
+    /* Responsive Top Logo */
+    header {
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: #fff;
     }
-    .site-logo{
-      width:100%;
-      height:auto;
-      display:block;
-      object-fit:cover;
+    .site-logo {
+      width: 100%;        /* screen کے مطابق adjust */
+      max-width: 400px;   /* زیادہ بڑی screen پر محدود */
+      height: auto;       /* aspect ratio برقرار رہے */
+      display: block;
+      margin: 0 auto;     /* center alignment */
+      object-fit: contain; /* stretch نہ ہو */
     }
 
     nav{
@@ -280,4 +283,4 @@
 </script>
 
 </body>
-  </html>
+    </html>
