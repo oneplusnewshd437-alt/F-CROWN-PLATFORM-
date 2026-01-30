@@ -17,16 +17,15 @@
       direction: rtl;
     }
 
-    /* HEADER */
+    /* HEADER LOGO */
     header{
+      text-align:center;
       margin:0;
       padding:0;
-      text-align:center;
     }
-
     .site-logo{
-      width:100%;   /* full width */
-      height:auto;  /* aspect ratio maintain */
+      width:100%;
+      height:auto;
       display:block;
     }
 
@@ -35,15 +34,20 @@
       background:#000;
       padding:10px;
       text-align:center;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
     nav a{
       color:#fff;
       margin:0 10px;
       text-decoration:none;
       font-size:14px;
+      font-weight:bold;
     }
     nav a:hover{
       text-decoration:underline;
+      color:red;
     }
 
     /* MAIN CONTAINER */
@@ -58,30 +62,61 @@
 
     /* NEWS SECTION */
     .news{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    article{
       background:#fff;
       padding:15px;
+      border-bottom:2px solid #ccc;
     }
-    .news h2{
-      font-size:26px;
-      border-bottom:2px solid #000;
-      padding-bottom:5px;
-      margin-bottom:15px;
-    }
-    .news article{
-      border-bottom:1px solid #ccc;
-      padding:12px 0;
-    }
-    .news article:last-child{
-      border-bottom:none;
-    }
-    .news article h3{
+
+    /* HEADLINE WITH BLACK BAR */
+    .headline{
+      font-size:24px;
+      font-weight:bold;
       margin:0 0 5px;
-      font-size:20px;
+      padding:5px 10px;
+      background:#000;
+      color:#fff;
     }
-    .news article p{
+
+    .news img{
+      width:100%;
+      height:auto;
+      margin-bottom:10px;
+    }
+
+    .news p{
+      font-size:16px;
+      line-height:1.8;
+      margin:8px 0;
+    }
+
+    .bureau{
+      font-style:italic;
+      margin-bottom:10px;
+    }
+
+    /* SHARE BUTTONS */
+    .share-buttons{
+      margin-top:15px;
+    }
+    .share-buttons a{
+      text-decoration:none;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:4px;
+      margin-right:8px;
       font-size:14px;
-      line-height:1.9;
-      margin:0;
+    }
+    .share-buttons .facebook{
+      background:#3b5998;
+    }
+    .share-buttons .whatsapp{
+      background:#25D366;
     }
 
     /* SIDEBAR */
@@ -90,6 +125,7 @@
       padding:15px;
     }
     .sidebar h3{
+      font-size:20px;
       border-bottom:2px solid #000;
       padding-bottom:5px;
       margin-bottom:10px;
@@ -118,10 +154,14 @@
       font-size:14px;
     }
 
-    /* RESPONSIVE MOBILE */
+    /* RESPONSIVE */
     @media(max-width:768px){
       .container{
         grid-template-columns:1fr;
+      }
+      .share-buttons a{
+        display:block;
+        margin:5px 0;
       }
     }
   </style>
@@ -129,7 +169,7 @@
 
 <body>
 
-<!-- HEADER WITH FULL WIDTH LOGO -->
+<!-- HEADER -->
 <header>
   <img src="untitled-1769458125072.jpeg" alt="Roznama Baseerat" class="site-logo">
 </header>
@@ -149,61 +189,40 @@
 
   <!-- NEWS SECTION -->
   <div class="news">
-    <h2>اہم خبریں</h2>
 
+    <!-- FIRST NEWS -->
     <article>
-      <h3>یہاں اپنی خبر کا عنوان لکھیں</h3>
-      <p>
-    
-    <article>
-  <!-- NEWS IMAGE -->
-  <img src="IMG-20260127-WA0089.jpg" alt="خیرپور پولیس خبر" style="width:100%; height:auto; margin-bottom:10px;">
+      <img src="IMG-20260127-WA0089.jpg" alt="خیرپور پولیس خبر">
+      <p class="bureau">(بیورو رپورٹ حب علی جھانگر)</p>
+      <div class="headline">
+        خیرپور پولیس کا کچے کے ڈاکوؤں کی سھولتکاری کرنے والوں کا گھیراؤ تنگ، کچے کے ڈاکوؤں کا علاج اور سہولتکاری کرنے والا عطائی ڈاکٹر گرفتار مقدمہ درج
+      </div>
+      <p>ایس ایچ او تھانہ فیض محمد بنڈو کی وفاقی سول انٹیلیجنس ادارے کی خفیہ اطلاع پر کاروائی</p>
+      <p>پولیس ٹیم نے وفاقی سول انٹیلیجنس ادارے کی مخفی اطلاع پر کاروائی کرکہ ڈاکوؤں کا علاج اور اسلحہ مہیا کرنے والے ملزم <strong>محمد عابد ولد مراد علی سولنگی</strong> کو گرفتار کر لیا اور مقدمہ درج کیا۔</p>
+      <p><strong>FIR. NO. 04/2026 u/s 216A,212, 230B,PS FM NAREJO</strong><br>
+         <strong>FIR. NO.05/2026 u/s 23(1)B PS FM NAREJO</strong></p>
+      <p>یاد رہے کہ گرفتار ملزم کچے کے ڈاکوؤں کا علاج کرکہ اسلحہ پہنچاتا تھا اور لوگوں کو ڈاکوؤں کا پیغام پہنچا کر خوفزدہ کرتا تھا۔</p>
+      <p>گرفتار ملزم سے مزید تفتیش جاری ہے، ایس ایس پی خیرپور ڈاکٹر سمیع اللہ سومرو کی جانب سے پولیس ٹیم کے لیے شاباشی کا پیغام۔</p>
 
-  <!-- BUREAU REPORT -->
-  <p style="font-style:italic; margin:0 0 10px;">(بیورو رپورٹ حب علی جھانگر)</p>
-
-  <!-- HEADLINE -->
-  <h3 style="font-size:24px; font-weight:bold; margin:0 0 10px;">
-    خیرپور پولیس کا کچے کے ڈاکوؤں کی سھولتکاری کرنے والوں کا گھیراؤ تنگ، کچے کے ڈاکوؤں کا علاج اور سہولتکاری کرنے والا عطائی ڈاکٹر گرفتار مقدمہ درج
-  </h3>
-
-  <!-- NEWS BODY -->
-  <p>
-    ایس ایچ او تھانہ فیض محمد بنڈو کی وفاقی سول انٹیلیجنس ادارے کی خفیہ اطلاع پر کاروائی
-  </p>
-
-  <p>
-    پولیس ٹیم نے وفاقی سول انٹیلیجنس ادارے کی مخفی اطلاع پر کاروائی کرکہ ڈاکوؤں کا علاج اور اسلحہ مہیا کرنے والے ملزم <strong>محمد عابد ولد مراد علی سولنگی</strong> کو گرفتار کر لیا اور مقدمہ درج کیا۔
-  </p>
-
-  <p>
-    <strong>FIR. NO. 04/2026 u/s 216A,212, 230B,PS FM NAREJO</strong><br>
-    <strong>FIR. NO.05/2026 u/s 23(1)B PS FM NAREJO</strong>
-  </p>
-
-  <p>
-    یاد رہے کہ گرفتار ملزم کچے کے ڈاکوؤں کا علاج کرکہ اسلحہ پہنچاتا تھا اور لوگوں کو ڈاکوؤں کا پیغام پہنچا کر خوفزدہ کرتا تھا۔
-  </p>
-
-  <p>
-    گرفتار ملزم سے مزید تفتیش جاری ہے، ایس ایس پی خیرپور ڈاکٹر سمیع اللہ سومرو کی جانب سے پولیس ٹیم کے لیے شاباشی کا پیغام۔
-  </p>
-    </article>
+      <!-- SHARE BUTTONS -->
+      <div class="share-buttons">
+        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://YOURWEBSITE.com" target="_blank">Facebook Share</a>
+        <a class="whatsapp" href="https://api.whatsapp.com/send?text=Check this news: https://YOURWEBSITE.com" target="_blank">WhatsApp Share</a>
+      </div>
     </article>
 
+    <!-- SECOND NEWS -->
     <article>
-      <h3>دوسری اہم خبر</h3>
-      <p>
-        آپ روزانہ نئی خبریں شامل کر سکتے ہیں اور اپنی ویب سائٹ کو باقاعدہ اپڈیٹ رکھ سکتے ہیں۔
-      </p>
+      <div class="headline">دوسری اہم خبر</div>
+      <p>آپ روزانہ نئی خبریں شامل کر سکتے ہیں اور اپنی ویب سائٹ کو باقاعدہ اپڈیٹ رکھ سکتے ہیں۔</p>
     </article>
 
+    <!-- THIRD NEWS -->
     <article>
-      <h3>تیسری خبر</h3>
-      <p>
-        روزنامہ بصیرت آپ کو ملکی و بین الاقوامی خبروں سے باخبر رکھتا ہے۔
-      </p>
+      <div class="headline">تیسری خبر</div>
+      <p>روزنامہ بصیرت آپ کو ملکی و بین الاقوامی خبروں سے باخبر رکھتا ہے۔</p>
     </article>
+
   </div>
 
   <!-- SIDEBAR -->
@@ -226,4 +245,4 @@
 </footer>
 
 </body>
-</html>
+  </html>
